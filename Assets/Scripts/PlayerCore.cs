@@ -10,8 +10,7 @@ public class PlayerCore : MonoBehaviour
 	[Header("UI")]
 	public GameObject[] hearts;
 	public GameObject gougiPanel;
-	[HideInInspector]
-	public int gougiHelpDisplayed = 0;
+	public GameObject gougiHelp;
 	int gougiCount = 0;
 	bool gougiAttackSpeedOne = false;
 	bool gougiAttackSpeedTwo = false;
@@ -22,6 +21,8 @@ public class PlayerCore : MonoBehaviour
 	bool gougiSizeOne = false;
 	bool gougiSizeTwo = false;
 	bool gougiSizeThree = false;
+	bool gougiVampire = false;
+	int gougiVampireCount = 0;
 
 	void Update()
 	{
@@ -45,6 +46,18 @@ public class PlayerCore : MonoBehaviour
 
 	public void HitAnEnemy(Vector3 enemy)
 	{
+		if (health == 1) {
+			if (gougiVampire) {
+				++health;
+				UpdateUI();
+			} else {
+				++gougiVampireCount;
+				if (gougiVampireCount >= 7) {
+					gougiVampire = true;
+					AddGougi("the Leech: killed 7 enemies at 1 health, life leech gained at 1 health", "rts");
+				}
+			}
+		}
 		if (gougiComboTimer >= comboInterval) {
 			gougiComboTimer = 0;
 			gougiComboCount = 1;
@@ -94,12 +107,7 @@ public class PlayerCore : MonoBehaviour
 		GameObject gougiIcon = GameObject.Instantiate(Resources.Load("GougiIcon")) as GameObject;
 		gougiIcon.transform.SetParent(gougiPanel.transform);
 		gougiIcon.transform.localPosition = new Vector2(2 + gougiCount * 42, -2);
-		GameObject gougiHelp = GameObject.Instantiate(Resources.Load("GougiHelp")) as GameObject;
-		gougiHelp.name = "GougiHelp";
 		gougiHelp.GetComponent<Text>().text = text;
-		gougiHelp.transform.SetParent(gougiPanel.transform);
-		++gougiHelpDisplayed;
-		gougiHelp.transform.localPosition = new Vector2(2 + gougiCount * 42, -42 - gougiHelpDisplayed * 30);
 		++gougiCount;
 	}
 }

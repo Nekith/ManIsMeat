@@ -43,7 +43,7 @@ public class Director : MonoBehaviour
 		used.Clear();
         while (p >= 20) {
 			Transform s = GetRandomFreeSpawnPoint();
-			Instantiate(Resources.Load("Vigil"), s.position + new Vector3(0, 1, 0), Quaternion.identity);
+			Instantiate(Resources.Load("Vigil"), s.position + new Vector3(0, 1.2f, 0), Quaternion.identity);
             ++evil;
             p -= 20;
         }
