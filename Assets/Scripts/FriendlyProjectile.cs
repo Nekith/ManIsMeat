@@ -27,6 +27,7 @@ public class FriendlyProjectile : MonoBehaviour
 		if (other.tag != "Player" && other.tag != "Gravity" && other.tag != "Projectile") {
 			if (other.tag == "Enemy") {
 				other.GetComponent<Enemy>().TakeHit(damage);
+				GameObject.Find("Player").GetComponent<PlayerCore>().HitAnEnemy(transform.position);
 			}
 			Vector3 p = transform.position + (GameObject.Find("Player").transform.position - transform.position).normalized;
 			GameObject.Instantiate(Resources.Load("FriendlyProjectileExplosion"), p, transform.rotation);
