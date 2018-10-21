@@ -10,6 +10,8 @@ public class PlayerCore : MonoBehaviour
 	[Header("UI")]
 	public GameObject[] hearts;
 	public GameObject gougiPanel;
+	[HideInInspector]
+	public int gougiHelpDisplayed = 0;
 	int gougiCount = 0;
 	bool gougiAttackSpeedOne = false;
 	bool gougiAttackSpeedTwo = false;
@@ -17,6 +19,9 @@ public class PlayerCore : MonoBehaviour
 	int gougiHitCount = 0;
 	int gougiComboCount = 0;
 	float gougiComboTimer = 0;
+	bool gougiSizeOne = false;
+	bool gougiSizeTwo = false;
+	bool gougiSizeThree = false;
 
 	void Update()
 	{
@@ -42,28 +47,45 @@ public class PlayerCore : MonoBehaviour
 	{
 		if (gougiComboTimer >= comboInterval) {
 			gougiComboTimer = 0;
-			gougiComboCount = 0;
+			gougiComboCount = 1;
 		} else {
 			gougiComboTimer = 0;
 			++gougiComboCount;
+			if (gougiAttackSpeedOne) {
+				if (gougiAttackSpeedTwo) {
+					if (!gougiAttackSpeedThree && gougiComboCount >= 4) {
+						gougiAttackSpeedThree = true;
+						GetComponent<PlayerShoot>().shootCooldownDuration -= 0.06f;
+						AddGougi("the Hunter: killed 4 enemies in chain, rate of fire increased", "rts");
+					}
+				} else if (gougiComboCount >= 3) {
+					gougiAttackSpeedTwo = true;
+					GetComponent<PlayerShoot>().shootCooldownDuration -= 0.06f;
+					AddGougi("the Hunter: killed 3 enemies in chain, rate of fire increased", "rts");
+				}
+			} else if (gougiComboCount >= 2) {
+				gougiAttackSpeedOne = true;
+				GetComponent<PlayerShoot>().shootCooldownDuration -= 0.06f;
+				AddGougi("the Hunter: killed 2 enemies in chain, rate of fire increased", "rts");
+			}
 		}
 		gougiHitCount++;
-		if (gougiAttackSpeedOne) {
-			if (gougiAttackSpeedTwo) {
-				if (!gougiAttackSpeedThree && gougiHitCount == 45) {
-					gougiAttackSpeedThree = true;
-					GetComponent<PlayerShoot>().shootCooldownDuration -= 0.06f;
-					AddGougi("the Hunter: killed 10 enemies, rate of fire increased", "rts");
+		if (gougiSizeOne) {
+			if (gougiSizeTwo) {
+				if (!gougiSizeThree && gougiHitCount == 45) {
+					gougiSizeThree = true;
+					GetComponent<PlayerShoot>().projectileSize += 0.04f;
+					AddGougi("the Tyrant: killed 45 enemies, size of projectile increased", "rts");
 				}
 			} else if (gougiHitCount == 25) {
-				gougiAttackSpeedTwo = true;
-				GetComponent<PlayerShoot>().shootCooldownDuration -= 0.06f;
-				AddGougi("the Hunter: killed 10 enemies, rate of fire increased", "rts");
+				gougiSizeTwo = true;
+				GetComponent<PlayerShoot>().projectileSize += 0.04f;
+				AddGougi("the Tyrant: killed 25 enemies, size of projectile increased", "rts");
 			}
 		} else if (gougiHitCount == 10) {
-			gougiAttackSpeedOne = true;
-			GetComponent<PlayerShoot>().shootCooldownDuration -= 0.06f;
-			AddGougi("the Hunter: killed 10 enemies, rate of fire increased", "rts");
+			gougiSizeOne = true;
+			GetComponent<PlayerShoot>().projectileSize += 0.04f;
+			AddGougi("the Tyrant: killed 10 enemies, size of projectile increased", "rts");
 		}
 	}
 
@@ -73,9 +95,11 @@ public class PlayerCore : MonoBehaviour
 		gougiIcon.transform.SetParent(gougiPanel.transform);
 		gougiIcon.transform.localPosition = new Vector2(2 + gougiCount * 42, -2);
 		GameObject gougiHelp = GameObject.Instantiate(Resources.Load("GougiHelp")) as GameObject;
+		gougiHelp.name = "GougiHelp";
 		gougiHelp.GetComponent<Text>().text = text;
 		gougiHelp.transform.SetParent(gougiPanel.transform);
-		gougiHelp.transform.localPosition = new Vector2(2 + gougiCount * 42, -44);
+		++gougiHelpDisplayed;
+		gougiHelp.transform.localPosition = new Vector2(2 + gougiCount * 42, -42 - gougiHelpDisplayed * 30);
 		++gougiCount;
 	}
 }

@@ -2340,6 +2340,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootCooldownDuration: 0.3
+  projectileSize: 0.14
   shootAnimDuration: 0.05
   cooldownGunPosition: {x: 0, y: -0.5, z: 0.45}
 --- !u!114 &728686878
@@ -2354,6 +2355,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 5
+  comboInterval: 3
   hearts:
   - {fileID: 1280473768}
   - {fileID: 1042420469}

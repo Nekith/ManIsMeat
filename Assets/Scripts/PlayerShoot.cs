@@ -7,6 +7,7 @@ public class PlayerShoot : MonoBehaviour
 {
 	[Header("Combat")]
 	public float shootCooldownDuration;
+	public float projectileSize;
 	[Header("Animation")]
 	public float shootAnimDuration;
 	public Vector3 cooldownGunPosition;
@@ -32,7 +33,8 @@ public class PlayerShoot : MonoBehaviour
 			if (Input.GetButton("Fire1")) {
 				cooldownTimer = shootCooldownDuration;
 				currentColor = cooldownGunColor;
-				GameObject.Instantiate(Resources.Load("FriendlyProjectile"), gun.position, gun.rotation);
+				GameObject p = GameObject.Instantiate(Resources.Load("FriendlyProjectile"), gun.position, gun.rotation) as GameObject;
+				p.transform.localScale = new Vector3(projectileSize, projectileSize, projectileSize);
 			}
 		} else {
 			cooldownTimer -= Time.deltaTime;

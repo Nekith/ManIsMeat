@@ -10,6 +10,7 @@ public class GougiHelp : MonoBehaviour
 	{
 		timer += Time.deltaTime;
 		if (timer >= 8.0f) {
+			GameObject.Find("Player").GetComponent<PlayerCore>().gougiHelpDisplayed--;
 			Destroy(gameObject);
 		}
 	}
