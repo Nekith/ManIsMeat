@@ -5,6 +5,7 @@ using UnityEngine;
 public class Director : MonoBehaviour
 {
 	public Transform[] spawnPoints;
+	public GameObject titleScreen;
 	int wave;
     int score;
 	float timer;
@@ -16,7 +17,7 @@ public class Director : MonoBehaviour
 	{
 		wave = 1;
 		score = 0;
-		timer = 2f;
+		timer = 0f;
 		evil = 0;
 		player = GameObject.Find("Player").transform;
 		used = new List<Transform>();
@@ -30,6 +31,10 @@ public class Director : MonoBehaviour
 				SpawnWave();
             }
         }
+		if (timer == 0 && evil == 0 && score == 0 && Input.GetButtonDown("Jump")) {
+			SpawnWave();
+			titleScreen.SetActive(false);
+		}
     }
 
 	void SpawnWave()
@@ -50,7 +55,7 @@ public class Director : MonoBehaviour
 			--evil;
 			if (evil == 0) {
 				++wave;
-				timer = 3f;
+				timer = 2f;
 			}
 		}
 	}

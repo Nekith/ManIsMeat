@@ -24,7 +24,7 @@ public class FriendlyProjectile : MonoBehaviour
 
 	void OnTriggerEnter(Collider other)
 	{
-		if (other.tag != "Player" && other.tag != "Gravity") {
+		if (other.tag != "Player" && other.tag != "Gravity" && other.tag != "Projectile") {
 			if (other.tag == "Enemy") {
 				other.GetComponent<Enemy>().TakeHit(damage);
 			}

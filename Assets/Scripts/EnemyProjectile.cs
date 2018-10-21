@@ -22,7 +22,7 @@ public class EnemyProjectile : MonoBehaviour
 
 	void OnTriggerEnter(Collider other)
 	{
-		if (other.tag != "Enemy" && other.tag != "Gravity") {
+		if (other.tag != "Enemy" && other.tag != "Gravity" && other.tag != "Projectile") {
 			if (other.tag == "Player") {
 				other.GetComponent<PlayerCore>().TakeHit();
 			}
