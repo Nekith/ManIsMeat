@@ -1,0 +1,27 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class FriendlyProjectile : MonoBehaviour
+{
+	public float speed = 5.0f;
+	Rigidbody rigid;
+
+	void Start()
+	{
+		rigid = GetComponent<Rigidbody>();
+	}
+
+	void FixedUpdate()
+	{
+		rigid.MovePosition(transform.position - transform.up * Time.fixedDeltaTime * speed);
+	}
+
+	void OnTriggerEnter(Collider other)
+	{
+		if (other.tag != "Player") {
+			GameObject.Instantiate(Resources.Load("FriendlyProjectileExplosion"), transform.position, transform.rotation);
+			Destroy(gameObject);
+		}
+	}
+}
