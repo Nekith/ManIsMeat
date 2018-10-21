@@ -15,6 +15,9 @@ public class FriendlyProjectile : MonoBehaviour
 	void FixedUpdate()
 	{
 		rigid.MovePosition(transform.position - transform.up * Time.fixedDeltaTime * speed);
+		if (transform.position.magnitude >= 300) {
+			Destroy(gameObject);
+		}
 	}
 
 	void OnTriggerEnter(Collider other)
