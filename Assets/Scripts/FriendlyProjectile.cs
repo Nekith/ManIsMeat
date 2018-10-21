@@ -5,6 +5,8 @@ using UnityEngine;
 public class FriendlyProjectile : MonoBehaviour
 {
 	public float speed = 5.0f;
+	[HideInInspector]
+	public int damage = 1;
 	Rigidbody rigid;
 
 	void Start()
@@ -22,8 +24,12 @@ public class FriendlyProjectile : MonoBehaviour
 
 	void OnTriggerEnter(Collider other)
 	{
-		if (other.tag != "Player") {
-			GameObject.Instantiate(Resources.Load("FriendlyProjectileExplosion"), transform.position, transform.rotation);
+		if (other.tag != "Player" && other.tag != "Gravity") {
+			if (other.tag == "Enemy") {
+				other.GetComponent<Enemy>().TakeHit(damage);
+			}
+			Vector3 p = transform.position + (GameObject.Find("Player").transform.position - transform.position).normalized;
+			GameObject.Instantiate(Resources.Load("FriendlyProjectileExplosion"), p, transform.rotation);
 			Destroy(gameObject);
 		}
 	}
