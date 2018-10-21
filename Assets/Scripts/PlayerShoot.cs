@@ -7,7 +7,6 @@ public class PlayerShoot : MonoBehaviour
 {
 	[Header("Combat")]
 	public float shootCooldownDuration;
-	public int health;
 	[Header("Animation")]
 	public float shootAnimDuration;
 	public Vector3 cooldownGunPosition;
@@ -53,10 +52,5 @@ public class PlayerShoot : MonoBehaviour
 			gun.GetComponent<MeshRenderer>().material.SetColor("_Color", currentColor);
 			gun.localPosition = baseGunPosition + (cooldownGunPosition - baseGunPosition) * p;
 		}
-	}
-
-	public void TakeHit()
-	{
-		health--;
 	}
 }

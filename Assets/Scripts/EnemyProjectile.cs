@@ -24,7 +24,7 @@ public class EnemyProjectile : MonoBehaviour
 	{
 		if (other.tag != "Enemy" && other.tag != "Gravity") {
 			if (other.tag == "Player") {
-				other.GetComponent<PlayerShoot>().TakeHit();
+				other.GetComponent<PlayerCore>().TakeHit();
 			}
 			Destroy(gameObject);
 		}
