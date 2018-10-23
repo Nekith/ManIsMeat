@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Director : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class Director : MonoBehaviour
 	public AudioClip gameOverSound;
 	public GameObject gameOver;
 	public GameObject gameOverCamera;
+	public GameObject killLabel;
+	public GameObject killCount;
 	AudioSource audioPlayer;
 	int wave;
     int score;
@@ -64,6 +67,9 @@ public class Director : MonoBehaviour
             ++evil;
             p -= 20;
         }
+		killLabel.SetActive(true);
+		killCount.SetActive(true);
+		killCount.GetComponent<Text>().text = evil.ToString();
 		audioPlayer.Stop();
 		audioPlayer.clip = spawnSound;
 		audioPlayer.Play();
@@ -76,6 +82,10 @@ public class Director : MonoBehaviour
 			if (evil == 0) {
 				++wave;
 				timer = 2f;
+				killLabel.SetActive(false);
+				killCount.SetActive(false);
+			} else {
+				killCount.GetComponent<Text>().text = evil.ToString();
 			}
 		}
 	}

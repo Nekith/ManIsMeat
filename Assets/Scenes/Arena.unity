@@ -2036,7 +2036,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &604643698
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2594,7 +2594,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &769628521
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4459,7 +4459,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1598975947
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4885,6 +4885,8 @@ MonoBehaviour:
   gameOverSound: {fileID: 8300000, guid: 80146f225e1f3425e80398085bf50310, type: 3}
   gameOver: {fileID: 1756578399}
   gameOverCamera: {fileID: 1262175343}
+  killLabel: {fileID: 769628520}
+  killCount: {fileID: 604643697}
 --- !u!4 &1771030932
 Transform:
   m_ObjectHideFlags: 0
