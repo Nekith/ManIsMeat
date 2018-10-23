@@ -7,6 +7,7 @@ public class PlayerCore : MonoBehaviour
 {
 	public int health;
 	public float comboInterval;
+	public int healthIndicatorDuration;
 	public AudioClip gougiSound;
 	public AudioClip hitSound;
 	GameObject[] hearts;
@@ -24,6 +25,7 @@ public class PlayerCore : MonoBehaviour
 	bool gougiSizeTwo = false;
 	bool gougiSizeThree = false;
 	int gougiVampireCount = 0;
+	float healthIndicatorTimer = 0f;
 
 	void Start()
 	{
@@ -36,12 +38,19 @@ public class PlayerCore : MonoBehaviour
 		gougiHelp = GameObject.Find("GougiHelp");
 		gougiHelp.GetComponent<Text>().text = "";
 		healthIndicator = GameObject.Find("HealthIndicator");
+		healthIndicator.GetComponent<Image>().enabled = false;
 		UpdateUI();
 	}
 
 	void Update()
 	{
 		gougiComboTimer += Time.deltaTime;
+		if (healthIndicatorTimer > 0f) {
+			healthIndicatorTimer -= Time.deltaTime;
+			if (healthIndicatorTimer <= 0f) {
+			healthIndicator.GetComponent<Image>().enabled = false;
+			}
+		}
 	}
 
 	void UpdateUI()
@@ -54,6 +63,8 @@ public class PlayerCore : MonoBehaviour
 	public void TakeHit()
 	{
 		if (health >= 1) {
+			healthIndicator.GetComponent<Image>().enabled = true;
+			healthIndicatorTimer = healthIndicatorDuration;
 			health--;
 			if (health == 0) {
 				StartCoroutine(GameObject.Find("Director").GetComponent<Director>().PlayerDeath());
