@@ -9,6 +9,8 @@ public class Mammoth : Enemy
 	public float durationMod;
 	public float shootWaitDuration;
 	public float speed = 6f;
+	public int numberProjectiles = 2;
+	public int numberProjectilesLevelMod = 1;
 	float cooldownTimer = 0f;
 	bool isMoving = false;
 	bool fired = false;
@@ -45,22 +47,19 @@ public class Mammoth : Enemy
 
 	IEnumerator Shoot()
 	{
-		GameObject p = GameObject.Instantiate(Resources.Load("EnemyProjectile"), transform.position, transform.rotation) as GameObject;
-		p.transform.LookAt(player);
-		audioPlayer.Stop();
-		audioPlayer.clip = shootSound;
-		audioPlayer.Play();
-		yield return new WaitForSeconds(shootWaitDuration);
-		p = GameObject.Instantiate(Resources.Load("EnemyProjectile"), transform.position, transform.rotation) as GameObject;
-		p.transform.LookAt(player);
-		audioPlayer.Stop();
-		audioPlayer.clip = shootSound;
-		audioPlayer.Play();
-		yield return new WaitForSeconds(shootWaitDuration);
-		p = GameObject.Instantiate(Resources.Load("EnemyProjectile"), transform.position, transform.rotation) as GameObject;
-		p.transform.LookAt(player);
-		audioPlayer.Stop();
-		audioPlayer.clip = shootSound;
-		audioPlayer.Play();
+		GameObject p = null;
+		for (int i = 0; i < numberProjectiles; i++) {
+			p = GameObject.Instantiate(Resources.Load("EnemyProjectile"), transform.position, transform.rotation) as GameObject;
+			p.transform.LookAt(player);
+			audioPlayer.Stop();
+			audioPlayer.clip = shootSound;
+			audioPlayer.Play();
+			yield return new WaitForSeconds(shootWaitDuration);
+		}
+	}
+
+	override public void SetLevel(int level)
+	{
+		numberProjectiles += level * numberProjectilesLevelMod;
 	}
 }

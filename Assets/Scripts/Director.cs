@@ -54,11 +54,13 @@ public class Director : MonoBehaviour
         while (p >= 20) {
 			Transform s = GetRandomFreeSpawnPoint();
 			int r = Random.Range(0, (wave >= 2 ? 2 : 1));
+			Enemy enemy = null;
 			if (r == 0) {
-				Instantiate(Resources.Load("Vigil"), s.position + new Vector3(0, 1.2f, 0), Quaternion.identity);
+				enemy = (GameObject.Instantiate(Resources.Load("Vigil"), s.position + new Vector3(0, 1.2f, 0), Quaternion.identity) as GameObject).GetComponent<Enemy>();
 			} else {
-				Instantiate(Resources.Load("Mammoth"), s.position + new Vector3(0, 1.2f, 0), Quaternion.identity);
+				enemy = (GameObject.Instantiate(Resources.Load("Mammoth"), s.position + new Vector3(0, 1.2f, 0), Quaternion.identity) as GameObject).GetComponent<Enemy>();
 			}
+			enemy.SetLevel(Mathf.FloorToInt(wave / 2));
             ++evil;
             p -= 20;
         }

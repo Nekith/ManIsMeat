@@ -242,6 +242,7 @@ MonoBehaviour:
   health: 1
   shootSound: {fileID: 8300000, guid: 29899a6d2a3914219b4745bcc9c97491, type: 3}
   shootCooldownDuration: 1.5
+  cooldownLevelMod: 0.2
   speed: 7
 --- !u!135 &135407439206853728
 SphereCollider:

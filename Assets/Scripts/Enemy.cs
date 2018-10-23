@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Enemy : MonoBehaviour
+public abstract class Enemy : MonoBehaviour
 {
 	public int health = 1;
 	public AudioClip shootSound;
@@ -59,4 +59,6 @@ public class Enemy : MonoBehaviour
 			}
 		}
 	}
+
+	abstract public void SetLevel(int level);
 }

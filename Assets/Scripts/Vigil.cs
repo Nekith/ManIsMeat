@@ -5,6 +5,7 @@ using UnityEngine;
 public class Vigil : Enemy
 {
 	public float shootCooldownDuration;
+	public float cooldownLevelMod;
 	public float speed = 8f;
 	float cooldownTimer = 0f;
 
@@ -33,5 +34,10 @@ public class Vigil : Enemy
 			nav.isStopped = false;
 			UpdateSeePlayer();
 		}
+	}
+
+	override public void SetLevel(int level)
+	{
+		shootCooldownDuration -= cooldownLevelMod * level;
 	}
 }
