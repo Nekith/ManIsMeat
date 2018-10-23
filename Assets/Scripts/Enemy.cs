@@ -43,7 +43,7 @@ public class Enemy : MonoBehaviour
 				dying = true;
 				dyingTimer = 0.15f;
 				GameObject.Find("Director").GetComponent<Director>().EnemyDeath();
-				GameObject.Instantiate(Resources.Load("EnemyExplosion"), transform.position, transform.rotation);
+				GameObject.Instantiate(Resources.Load("EnemyExplosion"), new Vector3(transform.position.x, 1.5f, transform.position.z), transform.rotation);
 			}
 		}
 	}

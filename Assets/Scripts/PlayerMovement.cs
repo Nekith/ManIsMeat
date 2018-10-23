@@ -25,13 +25,13 @@ public class PlayerMovement : MonoBehaviour
 	void Update()
 	{
 		transform.Rotate(Vector3.up * Input.GetAxisRaw("Mouse X") * sensitivity);
-		verticalRotation += Input.GetAxisRaw("Mouse Y") * sensitivity;
-		verticalRotation = Mathf.Clamp(verticalRotation, -60, 60);
-		eyes.localEulerAngles = Vector3.left * verticalRotation;
-		float h = Input.GetAxisRaw("Horizontal") * sensitivity;
-		float v = Input.GetAxisRaw("Vertical") * sensitivity;
+		//verticalRotation += Input.GetAxisRaw("Mouse Y") * sensitivity;
+		//verticalRotation = Mathf.Clamp(verticalRotation, -60, 60);
+		//eyes.localEulerAngles = Vector3.left * verticalRotation;
+		float h = Input.GetAxisRaw("Horizontal");
+		float v = Input.GetAxisRaw("Vertical");
 		if (h != 0 || v != 0) {
-			velocity += (transform.right * h + transform.forward * v).normalized * acceleration;
+			velocity += (transform.right * v - transform.forward * h).normalized * acceleration;
 		} else {
 			velocity -= velocity.normalized * deceleration;
 		}
