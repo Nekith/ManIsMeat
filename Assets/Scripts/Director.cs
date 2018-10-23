@@ -6,6 +6,8 @@ public class Director : MonoBehaviour
 {
 	public Transform[] spawnPoints;
 	public GameObject titleScreen;
+	public AudioClip spawnSound;
+	AudioSource audioPlayer;
 	int wave;
     int score;
 	float timer;
@@ -21,6 +23,7 @@ public class Director : MonoBehaviour
 		evil = 0;
 		player = GameObject.Find("Player").transform;
 		used = new List<Transform>();
+		audioPlayer = GetComponent<AudioSource>();
 	}
 
 	void Update()
@@ -52,6 +55,9 @@ public class Director : MonoBehaviour
             ++evil;
             p -= 20;
         }
+		audioPlayer.Stop();
+		audioPlayer.clip = spawnSound;
+		audioPlayer.Play();
 	}
 
 	public void EnemyDeath()

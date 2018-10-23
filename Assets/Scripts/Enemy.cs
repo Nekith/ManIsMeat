@@ -6,10 +6,12 @@ using UnityEngine.AI;
 public class Enemy : MonoBehaviour
 {
 	public int health = 1;
+	public AudioClip shootSound;
 	protected Transform player;
 	protected bool seePlayer;
 	protected Rigidbody rigid;
 	protected NavMeshAgent nav;
+	protected AudioSource audioPlayer;
 	bool dying;
 	float dyingTimer;
 
@@ -20,6 +22,7 @@ public class Enemy : MonoBehaviour
 		seePlayer = false;
 		rigid = GetComponent<Rigidbody>();
 		nav = GetComponent<NavMeshAgent>();
+		audioPlayer = GetComponent<AudioSource>();
 	}
 
 	void Update()

@@ -7,10 +7,12 @@ public class PlayerCore : MonoBehaviour
 {
 	public int health;
 	public float comboInterval;
+	public AudioClip gougiSound;
 	[Header("UI")]
 	public GameObject[] hearts;
 	public GameObject gougiPanel;
 	public GameObject gougiHelp;
+	AudioSource audioPlayer;
 	int gougiCount = 0;
 	bool gougiAttackSpeedOne = false;
 	bool gougiAttackSpeedTwo = false;
@@ -23,6 +25,11 @@ public class PlayerCore : MonoBehaviour
 	bool gougiSizeThree = false;
 	bool gougiVampire = false;
 	int gougiVampireCount = 0;
+
+	void Start()
+	{
+		audioPlayer = GetComponent<AudioSource>();
+	}
 
 	void Update()
 	{
@@ -109,5 +116,8 @@ public class PlayerCore : MonoBehaviour
 		gougiIcon.transform.localPosition = new Vector2(2 + gougiCount * 42, -2);
 		gougiHelp.GetComponent<Text>().text = text;
 		++gougiCount;
+		audioPlayer.Stop();
+		audioPlayer.clip = gougiSound;
+		audioPlayer.Play();
 	}
 }

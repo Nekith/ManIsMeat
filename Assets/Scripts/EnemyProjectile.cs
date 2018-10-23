@@ -26,6 +26,8 @@ public class EnemyProjectile : MonoBehaviour
 			if (other.tag == "Player") {
 				other.GetComponent<PlayerCore>().TakeHit();
 			}
+			Vector3 p = transform.position + (GameObject.Find("Player").transform.position - transform.position).normalized;
+			GameObject.Instantiate(Resources.Load("EnemyProjectileExplosion"), p, transform.rotation);
 			Destroy(gameObject);
 		}
 	}

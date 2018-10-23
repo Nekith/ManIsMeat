@@ -22,13 +22,15 @@ public class Vigil : Enemy
 					GameObject p = GameObject.Instantiate(Resources.Load("EnemyProjectile"), transform.position, transform.rotation) as GameObject;
 					p.transform.LookAt(player);
 					cooldownTimer = shootCooldownDuration;
+					audioPlayer.Stop();
+					audioPlayer.clip = shootSound;
+					audioPlayer.Play();
 				}
 			}
 		}
 		if (!seePlayer) {
 			nav.destination = player.position;
 			nav.isStopped = false;
-			//rigid.MovePosition(transform.position + (player.position - transform.position).normalized * speed * Time.fixedDeltaTime);
 			UpdateSeePlayer();
 		}
 	}

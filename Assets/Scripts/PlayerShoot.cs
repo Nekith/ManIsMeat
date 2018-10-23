@@ -5,12 +5,12 @@ using UnityEditor.AnimatedValues;
 
 public class PlayerShoot : MonoBehaviour
 {
-	[Header("Combat")]
 	public float shootCooldownDuration;
 	public float projectileSize;
-	[Header("Animation")]
 	public float shootAnimDuration;
 	public Vector3 cooldownGunPosition;
+	public AudioClip shootSound;
+	AudioSource audioPlayer;
 	Transform gun;
 	Vector3 baseGunPosition;
 	Color baseGunColor;
@@ -20,6 +20,7 @@ public class PlayerShoot : MonoBehaviour
 
 	void Start()
 	{
+		audioPlayer = GetComponent<AudioSource>();
 		gun = transform.Find("MainCamera").Find("Gun");
 		baseGunPosition = gun.localPosition;
 		baseGunColor = gun.GetComponent<MeshRenderer>().material.GetColor("_EmissionColor");
@@ -35,6 +36,9 @@ public class PlayerShoot : MonoBehaviour
 				currentColor = cooldownGunColor;
 				GameObject p = GameObject.Instantiate(Resources.Load("FriendlyProjectile"), gun.position, gun.rotation) as GameObject;
 				p.transform.localScale = new Vector3(projectileSize, projectileSize, projectileSize);
+				audioPlayer.Stop();
+				audioPlayer.clip = shootSound;
+				audioPlayer.Play();
 			}
 		} else {
 			cooldownTimer -= Time.deltaTime;

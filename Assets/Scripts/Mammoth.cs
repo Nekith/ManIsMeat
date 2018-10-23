@@ -48,11 +48,20 @@ public class Mammoth : Enemy
 	{
 		GameObject p = GameObject.Instantiate(Resources.Load("EnemyProjectile"), transform.position, transform.rotation) as GameObject;
 		p.transform.LookAt(player);
+		audioPlayer.Stop();
+		audioPlayer.clip = shootSound;
+		audioPlayer.Play();
 		yield return new WaitForSeconds(shootWaitDuration);
 		p = GameObject.Instantiate(Resources.Load("EnemyProjectile"), transform.position, transform.rotation) as GameObject;
 		p.transform.LookAt(player);
+		audioPlayer.Stop();
+		audioPlayer.clip = shootSound;
+		audioPlayer.Play();
 		yield return new WaitForSeconds(shootWaitDuration);
 		p = GameObject.Instantiate(Resources.Load("EnemyProjectile"), transform.position, transform.rotation) as GameObject;
 		p.transform.LookAt(player);
+		audioPlayer.Stop();
+		audioPlayer.clip = shootSound;
+		audioPlayer.Play();
 	}
 }
