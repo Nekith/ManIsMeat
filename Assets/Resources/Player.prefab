@@ -413,15 +413,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 3
   comboInterval: 2
+  healthIndicatorDuration: 1.2
   gougiSound: {fileID: 8300000, guid: 3df19a99123944b3eb895a798f65e8fc, type: 3}
   hitSound: {fileID: 8300000, guid: 0e9151c665ffc456baadabf57d757bc0, type: 3}
-  hearts:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  gougiPanel: {fileID: 0}
-  gougiHelp: {fileID: 0}
-  healthIndicator: {fileID: 0}
 --- !u!114 &114595518439064384
 MonoBehaviour:
   m_ObjectHideFlags: 1

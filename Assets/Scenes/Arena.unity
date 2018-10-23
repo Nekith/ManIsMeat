@@ -5119,41 +5119,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114276057581987380, guid: 7e7a33da7eac29f40961a4405438fd99,
-        type: 2}
-      propertyPath: hearts.Array.data[0]
-      value: 
-      objectReference: {fileID: 1726798664}
-    - target: {fileID: 114276057581987380, guid: 7e7a33da7eac29f40961a4405438fd99,
-        type: 2}
-      propertyPath: hearts.Array.data[1]
-      value: 
-      objectReference: {fileID: 1574548563}
-    - target: {fileID: 114276057581987380, guid: 7e7a33da7eac29f40961a4405438fd99,
-        type: 2}
-      propertyPath: hearts.Array.data[2]
-      value: 
-      objectReference: {fileID: 1013570916}
-    - target: {fileID: 114276057581987380, guid: 7e7a33da7eac29f40961a4405438fd99,
-        type: 2}
-      propertyPath: gougiPanel
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114276057581987380, guid: 7e7a33da7eac29f40961a4405438fd99,
-        type: 2}
-      propertyPath: gougiHelp
-      value: 
-      objectReference: {fileID: 11118588}
-    - target: {fileID: 114276057581987380, guid: 7e7a33da7eac29f40961a4405438fd99,
-        type: 2}
-      propertyPath: healthIndicator
-      value: 
-      objectReference: {fileID: 887117790}
-    - target: {fileID: 114276057581987380, guid: 7e7a33da7eac29f40961a4405438fd99,
-        type: 2}
-      propertyPath: healthIndicatorDuration
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e7a33da7eac29f40961a4405438fd99, type: 2}
   m_IsPrefabAsset: 0

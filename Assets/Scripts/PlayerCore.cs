@@ -7,7 +7,7 @@ public class PlayerCore : MonoBehaviour
 {
 	public int health;
 	public float comboInterval;
-	public int healthIndicatorDuration;
+	public float healthIndicatorDuration;
 	public AudioClip gougiSound;
 	public AudioClip hitSound;
 	GameObject[] hearts;
