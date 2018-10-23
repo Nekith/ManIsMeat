@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class Enemy : MonoBehaviour
 	protected Transform player;
 	protected bool seePlayer;
 	protected Rigidbody rigid;
+	protected NavMeshAgent nav;
 	bool dying;
 	float dyingTimer;
 
@@ -17,6 +19,7 @@ public class Enemy : MonoBehaviour
 		player = GameObject.Find("Player").transform;
 		seePlayer = false;
 		rigid = GetComponent<Rigidbody>();
+		nav = GetComponent<NavMeshAgent>();
 	}
 
 	void Update()

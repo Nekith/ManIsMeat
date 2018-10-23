@@ -15,6 +15,7 @@ public class Vigil : Enemy
 		}
 		transform.LookAt(player);
 		if (seePlayer) {
+			nav.isStopped = true;
 			if (cooldownTimer <= 0f) {
 				UpdateSeePlayer();
 				if (seePlayer) {
@@ -25,7 +26,9 @@ public class Vigil : Enemy
 			}
 		}
 		if (!seePlayer) {
-			rigid.MovePosition(transform.position + (player.position - transform.position).normalized * speed * Time.fixedDeltaTime);
+			nav.destination = player.position;
+			nav.isStopped = false;
+			//rigid.MovePosition(transform.position + (player.position - transform.position).normalized * speed * Time.fixedDeltaTime);
 			UpdateSeePlayer();
 		}
 	}
