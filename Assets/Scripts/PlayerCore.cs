@@ -9,10 +9,10 @@ public class PlayerCore : MonoBehaviour
 	public float comboInterval;
 	public AudioClip gougiSound;
 	public AudioClip hitSound;
-	[Header("UI")]
-	public GameObject[] hearts;
-	public GameObject gougiPanel;
-	public GameObject gougiHelp;
+	GameObject[] hearts;
+	GameObject gougiPanel;
+	GameObject gougiHelp;
+	GameObject healthIndicator;
 	AudioSource audioPlayer;
 	int gougiCount = 0;
 	bool gougiAttackSpeedOne = false;
@@ -30,6 +30,19 @@ public class PlayerCore : MonoBehaviour
 	void Start()
 	{
 		audioPlayer = GetComponent<AudioSource>();
+		hearts = new GameObject[3];
+		int imax = GameObject.Find("Hearts").transform.childCount;
+		for (int i = 0; i < imax; i++) {
+			hearts[i] = GameObject.Find("Hearts").transform.GetChild(i).gameObject;
+		}
+		gougiPanel = GameObject.Find("GougiPanel");
+		while (gougiPanel.transform.childCount != 0) {
+			Destroy(gougiPanel.transform.GetChild(0).gameObject);
+		}
+		gougiHelp = GameObject.Find("GougiHelp");
+		gougiHelp.GetComponent<Text>().text = "";
+		healthIndicator = GameObject.Find("HealthIndicator");
+		UpdateUI();
 	}
 
 	void Update()
@@ -46,8 +59,18 @@ public class PlayerCore : MonoBehaviour
 
 	public void TakeHit()
 	{
-		health--;
-		UpdateUI();
+		if (health >= 1) {
+			health--;
+			if (health == 0) {
+				StartCoroutine(GameObject.Find("Director").GetComponent<Director>().PlayerDeath());
+			} else {
+				UpdateUI();
+				audioPlayer.Stop();
+				audioPlayer.clip = hitSound;
+				audioPlayer.Play();
+				healthIndicator.SetActive(true);
+			}
+		}
 	}
 
 	public void HitAnEnemy(Vector3 enemy)

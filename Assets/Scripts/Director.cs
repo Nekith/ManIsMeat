@@ -7,11 +7,15 @@ public class Director : MonoBehaviour
 	public Transform[] spawnPoints;
 	public GameObject titleScreen;
 	public AudioClip spawnSound;
+	public AudioClip gameOverSound;
+	public GameObject gameOver;
+	public GameObject gameOverCamera;
 	AudioSource audioPlayer;
 	int wave;
     int score;
 	float timer;
 	int evil;
+	bool stopped;
 	Transform player;
 	List<Transform> used;
 
@@ -21,6 +25,7 @@ public class Director : MonoBehaviour
 		score = 0;
 		timer = 0f;
 		evil = 0;
+		stopped = false;
 		player = GameObject.Find("Player").transform;
 		used = new List<Transform>();
 		audioPlayer = GetComponent<AudioSource>();
@@ -28,15 +33,17 @@ public class Director : MonoBehaviour
 
 	void Update()
     {
-        if (timer > 0f) {
-            timer -= Time.deltaTime;
-            if (timer <= 0f) {
+		if (!stopped) {
+			if (timer > 0f) {
+				timer -= Time.deltaTime;
+				if (timer <= 0f) {
+					SpawnWave();
+				}
+			}
+			if (timer == 0 && evil == 0 && score == 0 && Input.GetButtonDown("Jump")) {
 				SpawnWave();
-            }
-        }
-		if (timer == 0 && evil == 0 && score == 0 && Input.GetButtonDown("Jump")) {
-			SpawnWave();
-			titleScreen.SetActive(false);
+				titleScreen.SetActive(false);
+			}
 		}
     }
 
@@ -69,6 +76,40 @@ public class Director : MonoBehaviour
 				timer = 2f;
 			}
 		}
+	}
+
+	public IEnumerator PlayerDeath()
+	{
+		stopped = true;
+		audioPlayer.Stop();
+		audioPlayer.clip = gameOverSound;
+		audioPlayer.Play();
+		yield return new WaitForSeconds(0.7f);
+		gameOver.SetActive(true);
+		Destroy(player.gameObject);
+		gameOverCamera.SetActive(true);
+		GameObject[] list = GameObject.FindGameObjectsWithTag("Enemy");
+		foreach (GameObject l in list) {
+			Destroy(l);
+		}
+		list = GameObject.FindGameObjectsWithTag("Projectile");
+		foreach (GameObject l in list) {
+			Destroy(l);
+		}
+	}
+
+	public void Restart()
+	{
+		gameOver.SetActive(false);
+		gameOverCamera.SetActive(false);
+		wave = 1;
+		score = 0;
+		timer = 0f;
+		evil = 0;
+		stopped = false;
+		player = (GameObject.Instantiate(Resources.Load("Player")) as GameObject).transform;
+		player.name = "Player";
+		titleScreen.SetActive(true);
 	}
 
 	Transform GetRandomFreeSpawnPoint()
