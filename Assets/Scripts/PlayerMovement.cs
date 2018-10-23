@@ -12,22 +12,17 @@ public class PlayerMovement : MonoBehaviour
 	float verticalRotation;
 	Rigidbody rigid;
 	CapsuleCollider capsule;
-	Transform eyes;
 
 	void Start()
 	{
 		Cursor.lockState = CursorLockMode.Locked;
 		Cursor.visible = false;
 		rigid = GetComponent<Rigidbody>();
-		eyes = transform.Find("MainCamera");
 	}
 
 	void Update()
 	{
 		transform.Rotate(Vector3.up * Input.GetAxisRaw("Mouse X") * sensitivity);
-		//verticalRotation += Input.GetAxisRaw("Mouse Y") * sensitivity;
-		//verticalRotation = Mathf.Clamp(verticalRotation, -60, 60);
-		//eyes.localEulerAngles = Vector3.left * verticalRotation;
 		float h = Input.GetAxisRaw("Horizontal");
 		float v = Input.GetAxisRaw("Vertical");
 		if (h != 0 || v != 0) {

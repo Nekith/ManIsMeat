@@ -285,7 +285,6 @@ MonoBehaviour:
   shootSound: {fileID: 8300000, guid: 29899a6d2a3914219b4745bcc9c97491, type: 3}
   moveDuration: 3
   shootCooldownDuration: 4
-  stalkCooldownDuration: 1.5
   durationMod: 0.1
   shootWaitDuration: 0.35
   speed: 4
@@ -299,7 +298,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.6
+  m_Radius: 0.7
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &136313676530607654
 CapsuleCollider:

@@ -8,6 +8,7 @@ public class PlayerCore : MonoBehaviour
 	public int health;
 	public float comboInterval;
 	public AudioClip gougiSound;
+	public AudioClip hitSound;
 	[Header("UI")]
 	public GameObject[] hearts;
 	public GameObject gougiPanel;
@@ -38,11 +39,9 @@ public class PlayerCore : MonoBehaviour
 
 	void UpdateUI()
 	{
-		hearts[0].SetActive(health >= 5);
-		hearts[1].SetActive(health >= 4);
-		hearts[2].SetActive(health >= 3);
-		hearts[3].SetActive(health >= 2);
-		hearts[4].SetActive(health >= 1);
+		hearts[0].SetActive(health >= 3);
+		hearts[1].SetActive(health >= 2);
+		hearts[2].SetActive(health >= 1);
 	}
 
 	public void TakeHit()
