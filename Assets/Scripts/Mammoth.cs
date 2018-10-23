@@ -6,12 +6,12 @@ public class Mammoth : Enemy
 {
 	public float moveDuration;
 	public float shootCooldownDuration;
-	public float stalkCooldownDuration;
 	public float durationMod;
 	public float shootWaitDuration;
 	public float speed = 6f;
 	float cooldownTimer = 0f;
 	bool isMoving = false;
+	bool fired = false;
 	Vector3 direction;
 
 	void FixedUpdate()
@@ -22,24 +22,23 @@ public class Mammoth : Enemy
 			cooldownTimer -= Time.fixedDeltaTime;
 			if (cooldownTimer <= 0) {
 				isMoving = false;
-				UpdateSeePlayer();
+				fired = false;
+				cooldownTimer = shootCooldownDuration + Random.Range(-durationMod, durationMod);
 			}
 		}
 		if (!isMoving) {
-			if (cooldownTimer <= 0) {
+			if (!fired) {
+				UpdateSeePlayer();
 				if (seePlayer) {
 					StartCoroutine(Shoot());
-					cooldownTimer = shootCooldownDuration + Random.Range(-durationMod, durationMod);
-				} else {
-					cooldownTimer = stalkCooldownDuration + Random.Range(-durationMod, durationMod);
+					fired = true;
 				}
-			} else {
-				cooldownTimer -= Time.fixedDeltaTime;
-				if (cooldownTimer <= 0) {
-					isMoving = true;
-					cooldownTimer = moveDuration + Random.Range(-durationMod, durationMod);
-					direction = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized;
-				}
+			}
+			cooldownTimer -= Time.fixedDeltaTime;
+			if (cooldownTimer <= 0) {
+				isMoving = true;
+				cooldownTimer = moveDuration + Random.Range(-durationMod, durationMod);
+				direction = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized;
 			}
 		}
 	}
