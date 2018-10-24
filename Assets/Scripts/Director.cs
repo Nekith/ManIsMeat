@@ -112,6 +112,8 @@ public class Director : MonoBehaviour
 
 	public void Restart()
 	{
+		killLabel.SetActive(false);
+		killCount.SetActive(false);
 		gameOver.SetActive(false);
 		gameOverCamera.SetActive(false);
 		wave = 1;
