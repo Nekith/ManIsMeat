@@ -110,6 +110,11 @@ public class Director : MonoBehaviour
 		}
 	}
 
+	public bool HasStarted()
+	{
+		return !(wave == 1 && score == 0 && evil == 0);
+	}
+
 	public void Restart()
 	{
 		killLabel.SetActive(false);
