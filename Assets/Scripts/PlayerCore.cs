@@ -91,6 +91,7 @@ public class PlayerCore : MonoBehaviour
 			if (gougiVampireCount >= 7) {
 				gougiVampireCount = 0;
 				AddGougi("the Leech: killed 7 enemies at 1 health, gained 1 health");
+				++health;
 				UpdateUI();
 			}
 		}
