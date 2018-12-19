@@ -52,7 +52,7 @@ public class Director : MonoBehaviour
 
 	void SpawnWave()
 	{
-		int p = 30 + wave * 15 + Random.Range(0, 30);
+		int p = 30 + wave * 10 + score * 20 + Random.Range(0, 20);
 		used.Clear();
         while (p >= 20) {
 			Transform s = GetRandomFreeSpawnPoint();
@@ -73,6 +73,11 @@ public class Director : MonoBehaviour
 		audioPlayer.Stop();
 		audioPlayer.clip = spawnSound;
 		audioPlayer.Play();
+	}
+
+	public void GainedGougi()
+	{
+		++score;
 	}
 
 	public void EnemyDeath()

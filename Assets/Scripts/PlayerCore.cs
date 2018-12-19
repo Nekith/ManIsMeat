@@ -146,5 +146,6 @@ public class PlayerCore : MonoBehaviour
 		audioPlayer.Stop();
 		audioPlayer.clip = gougiSound;
 		audioPlayer.Play();
+		GameObject.Find("Director").GetComponent<Director>().GainedGougi();
 	}
 }
